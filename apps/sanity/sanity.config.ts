@@ -4,20 +4,18 @@ import { schemaTypes, singletonActions, singletonTypes } from './structure/schem
 import { structureTool } from 'sanity/structure'
 import { media } from 'sanity-plugin-media'
 import { visionTool } from '@sanity/vision'
-import { showProductionUrl } from './utils/show-production-url'
 
 export default defineConfig({
   name: 'default',
   title: 'kryptonum-eu',
 
-  projectId: 'YOUR_PROJECT_ID',
+  projectId: 'vp4m23g3',
   dataset: 'production',
 
   plugins: [
     structureTool({ structure }),
     media(),
     visionTool(),
-    showProductionUrl(),
   ],
 
   schema: {

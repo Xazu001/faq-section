@@ -8,7 +8,7 @@ if (isPreviewDeployment && !SANITY_API_TOKEN) {
 }
 
 export const client = createClient({
-  projectId: 'YOUR_PROJECT_ID',
+  projectId: 'vp4m23g3',
   dataset: 'production',
   apiVersion: '2024-10-15',
   useCdn: false,
