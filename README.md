@@ -1,75 +1,46 @@
-# 🚀 Astro + Sanity + Turborepo Starter
+# Project Setup Guide
 
-⚡️ Kickstart your web projects with the [Astro](https://astro.build/) + [Sanity](https://www.sanity.io/) + [Truborepo](https://turbo.build/) Starter! Integrate Astro, Sanity, and Turborepo for high performance, Core Web Vitals optimization, and SEO-friendly web development. Perfect for building modern, fast, and flexible web applications with ease.
+This repository is a monorepo managed with [Turborepo](https://turbo.build/) and uses [Astro](https://astro.build/) and [Sanity](https://www.sanity.io/) as its main apps. The project uses [bun](https://bun.sh/) as the package manager and [concurrently](https://www.npmjs.com/package/concurrently) to run commands in parallel.
 
-## Features
+## Getting Started
 
-- **Portable Text**: Flexible rich text handling with customizable structures.
-- **Type Safety**: TypeScript support throughout the project.
-- **SEO Optimization**: Dynamic metadata fetching and SEO-friendly URLs.
-- **Sanity Integration**: Seamless content management with Sanity CMS.
-- **Error Handling**: Robust error management in metadata and content fetching.
-- **Customizable Components**: Flexibility in rendering text and links.
-- **Development Tools**: Integrated ESLint, Prettier, and TypeScript for high code quality.
-- **Preview Functionality**: Fast content preview and internal linking within Sanity.
-- **Singleton Types & Validation**: Ensures data integrity and easy management of global settings.
+### 1. Install Dependencies
 
-## Advantages
+Make sure you have [bun](https://bun.sh/) installed (version 1.1.26 or newer recommended).
 
-- **Performance**: Fast builds and efficient development with Turborepo.
-- **Type Safety**: Comprehensive TypeScript integration for reliable code.
-- **SEO-Ready**: Built-in optimizations for improved SEO performance.
-- **Seamless Integration**: Smooth content management with Sanity.
-- **Customizability**: Extensible components and flexible Portable Text configuration.
-- **CI/CD**: Automated Sanity deployments with GitHub Actions.
-
-## Setup Instructions
-
-### 1. Environment Variables
-
-Set the following environment variables for local or production setups:
-
-**Sanity Studio Preview**
-
-In the `/apps/sanity` directory, create a `.env.local` file with:
-
-```
-SANITY_STUDIO_PREVIEW_DOMAIN=<your_dev_deployment_URL>
+```sh
+bun install
 ```
 
-**Astro API Token**
+This will install all dependencies for the monorepo and its apps.
 
-In the `/apps/astro` directory, create a `.env.local` file with:
+### 2. Set Up Environment Variables
 
+Create a `.env` file in the root of the repository (or in the relevant app directories) and set the following environment variables:
+
+```env
+# Required for Sanity API access
+SANITY_API_TOKEN=your_sanity_api_token_here
+
+# Domain for Sanity Studio preview (e.g., http://localhost:4321 or your deployed Astro domain)
+SANITY_STUDIO_PREVIEW_DOMAIN=http://localhost:4321
 ```
-SANITY_API_TOKEN=<your_sanity_token>
+
+- `SANITY_API_TOKEN`: You can generate this token from your Sanity project settings.
+- `SANITY_STUDIO_PREVIEW_DOMAIN`: This should point to your Astro app's domain for previewing content.
+
+### 3. Development
+
+To run both Astro and Sanity apps in development mode concurrently:
+
+```sh
+bun run apps:dev
 ```
 
-_Generate this token in your Sanity project dashboard._
+This will start both apps using concurrently.
 
-### 2. Constant Files
-
-Update `constants.ts` in both `/apps/sanity/constants.ts` and `/apps/astro/src/global/constants.ts` directories to match your project settings.
-
-### 3. Project ID
-
-Update the `projectId` in:
-
-- `/apps/astro/src/utils/sanity.fetch.ts`
-- `/apps/sanity/sanity.cli.ts`
-- `/apps/sanity/sanity.config.ts`
-
-_Ensure these IDs correspond to your Sanity project._
-
-### 4. GitHub Actions
-
-To automatically deploy the Sanity Studio:
-
-- **Deployment Trigger**: Automatic deployment occurs when you push changes to any file within the `/apps/sanity/*` directory.
-- **Required Environment Variables**:
-  - `SANITY_DEPLOY_STUDIO_TOKEN`: Add this token to your GitHub project's environment variables for deployment.
-  - `SANITY_STUDIO_PREVIEW_DOMAIN`: Set this variable for your preview deployment domain in Sanity Studio.
+---
 
 ## Authors
 
-- [@milewskibogumil](https://github.com/milewskibogumil)
+Based on [Astro + Sanity + Turborepo Starter](https://github.com/milewskibogumil/astro-sanity-turborepo-starter) by [@milewskibogumil](https://github.com/milewskibogumil)
