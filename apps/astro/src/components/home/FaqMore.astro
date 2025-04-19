@@ -28,7 +28,10 @@ const { visible, all } = Astro.props
     const hiddenItems = document.querySelectorAll('#faq li.display-none')!
 
     const itemsToShow = Array.from(hiddenItems).slice(0, itemsToLoad)
-    itemsToShow.forEach((el) => el.classList.remove('display-none'))
+    itemsToShow.forEach((el) => {
+      el.classList.remove('display-none')
+      el.classList.add('slide-in')
+    })
 
     const newHiddenItems = document.querySelectorAll('#faq li.display-none')!
 
