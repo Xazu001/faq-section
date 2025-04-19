@@ -7,6 +7,7 @@ import CircleMinus from '@/src/components/icons/CircleMinus'
 import FaqMore from '@/src/components/home/FaqMore.astro'
 
 const metadata = await metadataFetch('Index_Page')
+
 const faqData = await sanityFetch({ query: '*[_type == "Faq_Collection"]' })
 const fixedFaq = faqData.map((faq) => ({
   question: faq.question?.[0]?.children?.[0]?.text,

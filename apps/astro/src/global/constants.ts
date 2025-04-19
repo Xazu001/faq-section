@@ -37,7 +37,7 @@ export const DOMAIN: string = "https://kryptonum.eu";
  * @constant
  * @type {string}
  */
-export const DEFAULT_TITLE: string = "Kryptonum";
+export const DEFAULT_TITLE: string = "FAQ";
 
 /**
  * Global declaration of the default description for the application.
@@ -46,7 +46,7 @@ export const DEFAULT_TITLE: string = "Kryptonum";
  * @constant
  * @type {string}
  */
-export const DEFAULT_DESCRIPTION: string = "Kryptonum tworzy nieszablonowe projekty tym, którym zależy na: 👨🏻‍💻 profesjonalnej stronie, 🎨 unikatowym brandingu, 💰 dochodowym biznesie online.";
+export const DEFAULT_DESCRIPTION: string = "Just some FAQ";
 
 /**
  * Object containing regular expressions for validation purposes.

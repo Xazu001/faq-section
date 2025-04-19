@@ -1,13 +1,12 @@
 
 import type { Props } from "@/src/layouts/Head.astro";
 import sanityFetch from "@/utils/sanity.fetch";
-
 export default async function metadataFetch(type: string, slug?: string): Promise<Props> {
   const filter = slug
     ? `*[_type == '${type}' && slug.current == $slug][0]`
     : `*[_type == "${type}"][0]`;
 
-  const seo = await sanityFetch<Props>({
+  const seo = await sanityFetch({
     query: /* groq */ `
       ${filter} {
         "path": coalesce(slug.current, '/'),
@@ -20,7 +19,7 @@ export default async function metadataFetch(type: string, slug?: string): Promis
       }
     `,
     ...(slug && { params: { slug: slug } }),
-  });
+  }) as Props;
   if (!seo?.path) throw new Error(`The path for '${type}' is not specified`);
   if (!seo?.title) throw new Error(`The title for '${type}' is not specified`);
   if (!seo?.description) throw new Error(`The description for '${type}' is not specified`);

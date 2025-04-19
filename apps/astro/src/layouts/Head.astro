@@ -15,7 +15,7 @@ export type OpenGraphImageProps = {
   height: string
 }
 
-const seo = await sanityFetch<{ openGraphImage: OpenGraphImageProps }>({
+const seo = await sanityFetch({
   query: `
     *[_type == "global"][0].seo {
       "openGraphImage": {
@@ -36,8 +36,8 @@ export type Props = {
 const { path, title, description, openGraphImage } = Astro.props
 
 const OpenGraphImage = {
-  url: openGraphImage?.url || seo.openGraphImage?.url,
-  height: openGraphImage?.height || seo.openGraphImage?.height,
+  url: openGraphImage?.url || (seo as any).openGraphImage?.url,
+  height: openGraphImage?.height || (seo as any).openGraphImage?.height,
 }
 
 const url = `${DOMAIN}${path}`

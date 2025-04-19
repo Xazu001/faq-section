@@ -6,6 +6,25 @@ import CirclePlus from '@/src/components/icons/CirclePlus'
 import CircleMinus from '@/src/components/icons/CircleMinus'
 
 const metadata = await metadataFetch('Index_Page')
+// Fix type if openGraphImage is nested, and ensure it matches OpenGraphImageProps
+if (
+  metadata.openGraphImage &&
+  typeof metadata.openGraphImage === 'object' &&
+  'openGraphImage' in metadata.openGraphImage &&
+  typeof metadata.openGraphImage.openGraphImage === 'object' &&
+  metadata.openGraphImage.openGraphImage !== null &&
+  'url' in metadata.openGraphImage.openGraphImage &&
+  'height' in metadata.openGraphImage.openGraphImage
+) {
+  metadata.openGraphImage = metadata.openGraphImage.openGraphImage as { url: string; height: string };
+}
+if (
+  metadata.openGraphImage &&
+  typeof metadata.openGraphImage === 'object' &&
+  !('url' in metadata.openGraphImage && 'height' in metadata.openGraphImage)
+) {
+  metadata.openGraphImage = undefined;
+}
 const faqData = await sanityFetch({ query: '*[_type == "Faq_Collection"]' })
 const fixedFaq = faqData.map((faq) => ({
   question: faq.question?.[0]?.children?.[0]?.text,
