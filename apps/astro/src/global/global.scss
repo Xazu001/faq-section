@@ -21,30 +21,13 @@
 :root {
   --g-font-size: clamp(calc(18rem / 16), 24vw/7.68, calc(32rem / 16));
   font-size: calc(var(--g-font-size) * 0.30);
-  // Vars 
-  --neutral-200: #f0f7f7;
-  --neutral-400: #c6cdcc;
-  --neutral-500: #75758a;
-  --neutral-600: #4a4a57;
-  --neutral-700: #383842;
-  --neutral-800: #202025;
-  --neutral-900: #000103;
 
-  --error-600: #380713;
-
+  --accent-1: #2dd282;
+  --accent-2: #90f4e8;
   --primary-500: #064040;
   --primary-600: #042b2b;
-  --primary-700: #021d1d;
-  --primary-900: #001414;
-
-  --visited-500: #bea3ff;
 
   --typography-heading-l: 3.8rem;
-
-  --easing: cubic-bezier(0.08, 0.82, 0.17, 1);
-
-  --primary-gradient-400: linear-gradient(266deg, #2dd282, #90f4e8);
-  --primary-gradient-900: linear-gradient(266deg, #0b0f0d, #011310, #001f1b);
 
   // Margins
   --page-margin: clamp(1rem, calc(2vw / 0.48), 2rem);

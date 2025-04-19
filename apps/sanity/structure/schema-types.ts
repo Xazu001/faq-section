@@ -36,7 +36,15 @@ const ui = [
   Heading,
 ];
 
-export const schemaTypes = [...singleTypes, ...collectionTypes, ...components, ...ui];
+import faqItem from '../schema/objects/faqItem';
+
+export const schemaTypes = [
+  ...singleTypes,
+  ...collectionTypes,
+  ...components,
+  ...ui,
+  faqItem,
+];
 
 export const singletonActions = new Set(["publish", "discardChanges", "restore"]);
 export const singletonTypes = new Set(singleTypes.map(type => type.name as string));

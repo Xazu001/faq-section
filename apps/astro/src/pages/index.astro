@@ -4,24 +4,26 @@ import metadataFetch from '@/utils/metadata.fetch'
 import sanityFetch from '../utils/sanity.fetch'
 import CirclePlus from '@/src/components/icons/CirclePlus'
 import CircleMinus from '@/src/components/icons/CircleMinus'
+import Decoration from '@/src/components/icons/Decoration'
 import FaqMore from '@/src/components/home/FaqMore.astro'
 
-let metadata;
+let metadata
 try {
-  metadata = await metadataFetch('Index_Page');
+  metadata = await metadataFetch('Index_Page')
 } catch (e) {
-  metadata = {};
+  metadata = {}
 }
-if (!metadata) metadata = {};
+if (!metadata) metadata = {}
 
 const faqData = await sanityFetch({ query: '*[_type == "Faq_Collection"]' })
-const fixedFaq = faqData.map((faq) => ({
-  question: faq.question?.[0]?.children?.[0]?.text,
-  answer: faq.answer?.[0]?.children?.[0]?.text,
-}))
+const fixedFaq =
+  faqData[0]?.faqs?.map((faq) => ({
+    question: faq.question?.[0]?.children?.[0]?.text,
+    answer: faq.answer?.[0]?.children?.[0]?.text,
+  })) || []
 
-const visibleQuestions = 2
-const allQuestions = faqData.length
+const visibleQuestions = 5
+const allQuestions = fixedFaq?.length ?? 0
 ---
 
 <Layout
@@ -33,7 +35,7 @@ const allQuestions = faqData.length
   <section id="faq">
     <div>
       <div class="header">
-        <h3><span>Pytaj</span>, jakby jutra miało nie być. Odpowiemy!</h3>
+        <h3><Decoration size="2.9rem" /><span>Pytaj</span>, jakby jutra miało nie być. Odpowiemy!</h3>
       </div>
       <ul>
         {
@@ -68,7 +70,7 @@ const allQuestions = faqData.length
           ))
         }
       </ul>
-      <FaqMore visible={visibleQuestions} all={allQuestions} />
+      <FaqMore visible={visibleQuestions > allQuestions ? allQuestions : visibleQuestions} all={allQuestions} />
     </div>
   </section>
 </Layout>
@@ -85,12 +87,23 @@ const allQuestions = faqData.length
 </script>
 <style>
   section {
-    padding-top: 16rem;
+    padding: 16rem 0;
+    min-height: 101vh;
   }
 
-  .header {
-    display: flex;
-    gap: 2rem;
+  .header svg {
+    display: inline;
+    vertical-align: middle;
+  }
+
+  .header span {
+    margin-left: 0.9rem;
+  }
+
+  .header span {
+    background: linear-gradient(280deg, var(--accent-1), var(--accent-2));
+    color: transparent;
+    -webkit-background-clip: text;
   }
 
   img {
@@ -121,7 +134,7 @@ const allQuestions = faqData.length
   }
 
   li[data-expanded] button::after {
-    background: linear-gradient(#90f4e8, #2dd282);
+    background: linear-gradient(280deg, var(--accent-1), var(--accent-2));
   }
 
   button strong {

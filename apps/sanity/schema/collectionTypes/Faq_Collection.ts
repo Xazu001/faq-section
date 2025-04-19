@@ -1,36 +1,29 @@
 import { defineField, defineType } from "sanity";
-import { toPlainText } from "../../utils/to-plain-text";
 
-const title = 'Zbiór elementów FAQ';
-const icon = () => '❓';
+const title = "FAQ";
+const icon = () => "❓";
 
 export default defineType({
-  name: 'Faq_Collection',
+  name: "Faq_Collection",
   type: "document",
   title,
   icon,
   fields: [
     defineField({
-      name: 'question',
-      type: 'Heading',
-      title: 'Pytanie',
-      validation: Rule => Rule.required(),
-    }),
-    defineField({
-      name: 'answer',
-      type: 'PortableText',
-      title: 'Odpowiedź',
-      validation: Rule => Rule.required(),
+      name: "faqs",
+      type: "array",
+      title: "FAQs",
+      of: [{ type: "faqItem" }],
+      description: "Przeciągnij, aby zmienić kolejność pytań.",
+      validation: Rule => Rule.required().min(1),
     }),
   ],
   preview: {
     select: {
-      title: 'question',
-      subtitle: 'answer',
+      title: "faqs",
     },
-    prepare: ({ title, subtitle }) => ({
-      title: toPlainText(title),
-      subtitle: toPlainText(subtitle),
+    prepare: ({ title }) => ({
+      title: `Kolekcja FAQ (${title?.length || 0} pytań)`,
       icon,
     }),
   },

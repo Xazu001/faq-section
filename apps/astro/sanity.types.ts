@@ -68,6 +68,49 @@ export type Geopoint = {
   alt?: number
 }
 
+export type FaqItem = {
+  _type: 'faqItem'
+  question?: Array<{
+    children?: Array<{
+      marks?: Array<string>
+      text?: string
+      _type: 'span'
+      _key: string
+    }>
+    style?: 'normal'
+    listItem?: never
+    markDefs?: null
+    level?: number
+    _type: 'block'
+    _key: string
+  }>
+  answer?: Array<{
+    children?: Array<{
+      marks?: Array<string>
+      text?: string
+      _type: 'span'
+      _key: string
+    }>
+    style?: 'normal'
+    listItem?: 'bullet' | 'number'
+    markDefs?: Array<{
+      type?: 'external' | 'internal'
+      external?: string
+      internal?: {
+        _ref: string
+        _type: 'reference'
+        _weak?: boolean
+        [internalGroqTypeReferenceTo]?: 'Index_Page'
+      }
+      _type: 'link'
+      _key: string
+    }>
+    level?: number
+    _type: 'block'
+    _key: string
+  }>
+}
+
 export type Heading = Array<{
   children?: Array<{
     marks?: Array<string>
@@ -131,8 +174,11 @@ export type Faq_Collection = {
   _createdAt: string
   _updatedAt: string
   _rev: string
-  question?: Heading
-  answer?: PortableText
+  faqs?: Array<
+    {
+      _key: string
+    } & FaqItem
+  >
 }
 
 export type Index_Page = {
@@ -291,6 +337,7 @@ export type AllSanitySchemaTypes =
   | SanityImageDimensions
   | SanityFileAsset
   | Geopoint
+  | FaqItem
   | Heading
   | PortableText
   | Cta
