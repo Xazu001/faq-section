@@ -1,7 +1,3 @@
-# Project Setup Guide
-
-This repository is a monorepo managed with [Turborepo](https://turbo.build/) and uses [Astro](https://astro.build/) and [Sanity](https://www.sanity.io/) as its main apps. The project uses [bun](https://bun.sh/) as the package manager and [concurrently](https://www.npmjs.com/package/concurrently) to run commands in parallel.
-
 ## Getting Started
 
 ### 1. Install Dependencies
