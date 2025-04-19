@@ -4,7 +4,7 @@ import metadataFetch from '@/utils/metadata.fetch'
 import sanityFetch from '../utils/sanity.fetch'
 import CirclePlus from '@/src/components/icons/CirclePlus'
 import CircleMinus from '@/src/components/icons/CircleMinus'
-import FaqSection from './FaqSection'
+import FaqMore from '@/src/components/home/FaqMore.astro'
 
 const metadata = await metadataFetch('Index_Page')
 const faqData = await sanityFetch({ query: '*[_type == "Faq_Collection"]' })
@@ -12,6 +12,9 @@ const fixedFaq = faqData.map((faq) => ({
   question: faq.question?.[0]?.children?.[0]?.text,
   answer: faq.answer?.[0]?.children?.[0]?.text,
 }))
+
+const visibleQuestions = 2
+const allQuestions = faqData.length
 ---
 
 <Layout {...metadata}>
@@ -23,7 +26,7 @@ const fixedFaq = faqData.map((faq) => ({
       <ul>
         {
           fixedFaq.map((faq, index) => (
-            <li>
+            <li class={index < visibleQuestions ? '' : 'display-none'}>
               <button>
                 <strong>{(index + 1).toString().padStart(2, '0')}</strong>
                 <div>
@@ -53,16 +56,18 @@ const fixedFaq = faqData.map((faq) => ({
           ))
         }
       </ul>
+      <FaqMore visible={visibleQuestions} all={allQuestions} />
     </div>
   </section>
 </Layout>
 <script>
+  // ----- Toggle FAQ items
   const faqItems = document.querySelectorAll('#faq li button')!
   faqItems.forEach((el, idx) => {
     el.addEventListener('click', (e) => {
-      faqItems[idx].parentElement?.toggleAttribute('data-expanded')
-      ;(e.currentTarget as HTMLButtonElement)?.querySelector('.minus')?.classList.toggle('hidden')
-      ;(e.currentTarget as HTMLButtonElement)?.querySelector('.plus')?.classList.toggle('hidden')
+      ;(e.currentTarget as HTMLButtonElement).parentElement!.toggleAttribute('data-expanded')
+      ;(e.currentTarget as HTMLButtonElement).querySelector('.minus')!.classList.toggle('hidden')
+      ;(e.currentTarget as HTMLButtonElement).querySelector('.plus')!.classList.toggle('hidden')
     })
   })
 </script>
@@ -70,55 +75,71 @@ const fixedFaq = faqData.map((faq) => ({
   section {
     padding-top: 16rem;
   }
+
   .header {
     display: flex;
     gap: 2rem;
   }
+
   img {
     width: 50rem;
   }
+
   ul {
     margin-top: 1.2rem;
   }
-  .fake {
-    display: none;
-  }
+
   button {
+    width: 100%;
     display: flex;
     gap: 3.2rem;
     padding: 2rem 1.6rem;
-    border-bottom: 1px solid #75758a;
     text-align: left;
+    position: relative;
   }
+
+  button::after {
+    position: absolute;
+    bottom: 0;
+    content: '';
+    width: 100%;
+    height: 1px;
+    background: #75758a;
+    transition: 0.3s;
+  }
+
+  li[data-expanded] button::after {
+    background: linear-gradient(#90f4e8, #2dd282);
+  }
+
   button strong {
     color: #c6cdcc;
     width: 4.8rem;
   }
+
   .question {
     display: flex;
     gap: 3.2rem;
     justify-content: space-between;
     align-items: center;
   }
+
   .icon {
     flex-shrink: 0;
-    /* position: fixed; */
-    /* top: 0; */
-    /* left: 0; */
-    /* width: 4rem; */
-    /* height: 4rem; */
   }
 
-  /* Hide plus icon when expanded, show minus icon */
-  li:not([data-expanded]) .answer {
-    height: 0;
+  li .answer {
+    max-height: 500px;
     overflow: hidden;
-    padding-bottom: 0;
-  }
-
-  li[data-expanded] .answer {
     padding-top: 2rem;
     padding-bottom: 2.4rem;
+    transition: 0.3s cubic-bezier(0.61, 1, 0.88, 1);
+  }
+
+  li:not([data-expanded]) .answer {
+    max-height: 0;
+    padding-top: 0;
+    padding-bottom: 0;
   }
 
   .icons {
@@ -133,5 +154,20 @@ const fixedFaq = faqData.map((faq) => ({
 
   .hidden {
     opacity: 0;
+  }
+
+  .icon {
+    flex-shrink: 0;
+    transition: 0.3s linear;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    li .answer {
+      transition: none;
+    }
+
+    .icon {
+      transition: none;
+    }
   }
 </style>

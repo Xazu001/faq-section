@@ -1,0 +1,114 @@
+---
+import ArrowDown from '@/components/icons/ArrowDown'
+const { visible, all } = Astro.props
+---
+
+<div class="faq-more">
+  <div>
+    <div class="cloud-box">
+      <div class="cloud">
+        <p>{visible}/{all}</p>
+      </div>
+    </div>
+
+    <div class="progress" style={`--progress: ${visible / all}`}>
+      <div class="progress-arrow"></div>
+    </div>
+    <div class="load-more-box">
+      <button class="load-more">Wczytaj więcej <ArrowDown size="2rem" /></button>
+    </div>
+  </div>
+</div>
+
+<script>
+  // ----- Load more FAQ items
+  const itemsToLoad = 2
+  const loadMoreButton = document.querySelector('.load-more')!
+  loadMoreButton.addEventListener('click', () => {
+    const hiddenItems = document.querySelectorAll('#faq li.display-none')!
+
+    const itemsToShow = Array.from(hiddenItems).slice(0, itemsToLoad)
+    itemsToShow.forEach((el) => el.classList.remove('display-none'))
+
+    const newHiddenItems = document.querySelectorAll('#faq li.display-none')!
+
+    // ----- Hide load more button if no more items to show
+    if (newHiddenItems.length === 0) {
+      document.querySelector('.faq-more')!.classList.add('display-none')
+    }
+
+    // ----- Update cloud text
+    const allQuestions = document.querySelectorAll('#faq li')!
+    const cloud = document.querySelector('.cloud')!
+    cloud.textContent = `${allQuestions.length - newHiddenItems.length}/${allQuestions.length}`
+
+    // ----- Update progress bar
+    const progress = document.querySelector('.progress') as HTMLDivElement
+    progress.style.setProperty('--progress', `${(allQuestions.length - newHiddenItems.length) / allQuestions.length}`)
+  })
+</script>
+<style>
+  .faq-more {
+    display: flex;
+    justify-content: center;
+    margin-top: 3.2rem;
+  }
+
+  .cloud-box {
+    display: flex;
+    justify-content: center;
+  }
+
+  .cloud {
+    position: relative;
+    text-align: center;
+    background-color: var(--primary-600);
+    padding: 0.2rem 1rem;
+    border-radius: 100px;
+  }
+
+  .cloud::after {
+    height: 30%;
+    aspect-ratio: 1;
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateY(50%);
+    rotate: 45deg;
+    background-color: var(--primary-600);
+  }
+
+  p {
+    font-size: 2.1rem;
+  }
+
+  .progress {
+    margin-top: 1.5rem;
+    --progress: 0.5;
+    height: 0.3rem;
+    background-color: var(--primary-600);
+    border-radius: 100px;
+    overflow: visible;
+    position: relative;
+  }
+
+  .progress::before {
+    content: '';
+    display: block;
+    height: 100%;
+    width: calc(var(--progress) * 100%);
+    background-color: var(--primary-500);
+    border-radius: 100px;
+  }
+
+  .load-more-box {
+    margin-top: 2rem;
+  }
+
+  .load-more {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+</style>

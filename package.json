@@ -13,7 +13,7 @@
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "sanity:extract": "cd apps/sanity && bunx sanity schema extract",
     "sanity:gen": "bun run sanity:extract && cd apps/sanity && sanity typegen generate",
-    "apps:dev": "bun i && concurrently \"cd apps/astro && bun run dev\" \"cd apps/sanity && bun run dev\""
+    "apps:dev": "concurrently \"cd apps/astro && bun run dev\" \"cd apps/sanity && bun run dev\""
   },
   "scriptsComments": {
     "build": "Builds the apps for production",
