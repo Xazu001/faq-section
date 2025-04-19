@@ -5,5 +5,5 @@ export default defineCliConfig({
     projectId: 'vp4m23g3',
     dataset: 'production'
   },
-  studioHost: 'kryptonum'
+  studioHost: 'faq-section'
 })

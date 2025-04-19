@@ -5,15 +5,15 @@ import { DOMAIN } from "./src/global/constants";
 import { isPreviewDeployment } from "./src/utils/is-preview-deployment";
 import redirects from "./redirects";
 
+import react from "@astrojs/react";
+
 export default defineConfig({
   server: {
     port: 5173,
     host: "0.0.0.0"
   },
   site: DOMAIN,
-  integrations: [
-    sitemap(),
-  ],
+  integrations: [sitemap(), react()],
   image: {
     remotePatterns: [{
       protocol: "https",

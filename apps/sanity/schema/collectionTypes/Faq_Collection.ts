@@ -6,7 +6,7 @@ const icon = () => '❓';
 
 export default defineType({
   name: 'Faq_Collection',
-  type: 'document',
+  type: "document",
   title,
   icon,
   fields: [

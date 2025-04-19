@@ -7,7 +7,7 @@ import { visionTool } from '@sanity/vision'
 
 export default defineConfig({
   name: 'default',
-  title: 'kryptonum-eu',
+  title: 'FAQ Section',
 
   projectId: 'vp4m23g3',
   dataset: 'production',

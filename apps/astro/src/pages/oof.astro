@@ -4,7 +4,6 @@ import metadataFetch from '@/utils/metadata.fetch'
 import sanityFetch from '../utils/sanity.fetch'
 import CirclePlus from '@/src/components/icons/CirclePlus'
 import CircleMinus from '@/src/components/icons/CircleMinus'
-import FaqSection from './FaqSection'
 
 const metadata = await metadataFetch('Index_Page')
 const faqData = await sanityFetch({ query: '*[_type == "Faq_Collection"]' })
@@ -29,7 +28,7 @@ const fixedFaq = faqData.map((faq) => ({
                 <div>
                   <div class="question">
                     <p>{faq.question}</p>
-                    <div class="icons">
+                    <div>
                       <CirclePlus
                         title="Green circle with plus inside"
                         size="2.4rem"
@@ -61,8 +60,8 @@ const fixedFaq = faqData.map((faq) => ({
   faqItems.forEach((el, idx) => {
     el.addEventListener('click', (e) => {
       faqItems[idx].parentElement?.toggleAttribute('data-expanded')
-      ;(e.currentTarget as HTMLButtonElement)?.querySelector('.minus')?.classList.toggle('hidden')
-      ;(e.currentTarget as HTMLButtonElement)?.querySelector('.plus')?.classList.toggle('hidden')
+      // ;(e.currentTarget as HTMLButtonElement)?.querySelector('.minus')?.classList.toggle('hidden')
+      faqItems[idx]?.querySelector('.plus')?.classList.toggle('hidden')
     })
   })
 </script>
@@ -79,9 +78,6 @@ const fixedFaq = faqData.map((faq) => ({
   }
   ul {
     margin-top: 1.2rem;
-  }
-  .fake {
-    display: none;
   }
   button {
     display: flex;
@@ -102,9 +98,7 @@ const fixedFaq = faqData.map((faq) => ({
   }
   .icon {
     flex-shrink: 0;
-    /* position: fixed; */
-    /* top: 0; */
-    /* left: 0; */
+    /* position: absolute; */
     /* width: 4rem; */
     /* height: 4rem; */
   }
@@ -121,17 +115,7 @@ const fixedFaq = faqData.map((faq) => ({
     padding-bottom: 2.4rem;
   }
 
-  .icons {
-    position: relative;
-  }
-
-  .minus {
-    position: absolute;
-    top: 0;
-    left: 0;
-  }
-
   .hidden {
-    opacity: 0;
+    display: none;
   }
 </style>

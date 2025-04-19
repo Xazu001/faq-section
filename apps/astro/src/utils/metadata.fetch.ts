@@ -10,7 +10,7 @@ export default async function metadataFetch(type: string, slug?: string): Promis
   const seo = await sanityFetch<Props>({
     query: /* groq */ `
       ${filter} {
-        "path": slug.current,
+        "path": coalesce(slug.current, '/'),
         "title": seo.title,
         "description": seo.description,
         "openGraphImage": {

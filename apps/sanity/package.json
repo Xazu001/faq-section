@@ -9,7 +9,18 @@
     "start": "sanity start",
     "build": "sanity build",
     "deploy": "sanity deploy",
-    "deploy-graphql": "sanity graphql deploy"
+    "deploy-graphql": "sanity graphql deploy",
+    "extract": "sanity schema extract",
+    "gen": "sanity typegen generate"
+  },
+  "scriptsComments": {
+    "dev": "Starts the Sanity Studio in development mode",
+    "start": "Starts the Sanity Studio in production mode",
+    "build": "Builds the Sanity Studio for production",
+    "deploy": "Deploys the Sanity Studio to production",
+    "deploy-graphql": "Deploys the GraphQL API to production",
+    "extract": "Extracts the schema from the Sanity Studio",
+    "gen": "Generates the TypeScript types for the schema"
   },
   "keywords": [
     "sanity"
