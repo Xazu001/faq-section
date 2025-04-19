@@ -6,7 +6,13 @@ import CirclePlus from '@/src/components/icons/CirclePlus'
 import CircleMinus from '@/src/components/icons/CircleMinus'
 import FaqMore from '@/src/components/home/FaqMore.astro'
 
-const metadata = await metadataFetch('Index_Page')
+let metadata;
+try {
+  metadata = await metadataFetch('Index_Page');
+} catch (e) {
+  metadata = {};
+}
+if (!metadata) metadata = {};
 
 const faqData = await sanityFetch({ query: '*[_type == "Faq_Collection"]' })
 const fixedFaq = faqData.map((faq) => ({
@@ -18,7 +24,12 @@ const visibleQuestions = 2
 const allQuestions = faqData.length
 ---
 
-<Layout {...metadata}>
+<Layout
+  path=""
+  title={metadata.title ?? ''}
+  description={metadata.description ?? ''}
+  openGraphImage={metadata.openGraphImage}
+>
   <section id="faq">
     <div>
       <div class="header">
@@ -64,11 +75,11 @@ const allQuestions = faqData.length
 <script>
   // ----- Toggle FAQ items
   const faqItems = document.querySelectorAll('#faq li button')!
-  faqItems.forEach((el, idx) => {
-    el.addEventListener('click', (e) => {
-      ;(e.currentTarget as HTMLButtonElement).parentElement!.toggleAttribute('data-expanded')
-      ;(e.currentTarget as HTMLButtonElement).querySelector('.minus')!.classList.toggle('hidden')
-      ;(e.currentTarget as HTMLButtonElement).querySelector('.plus')!.classList.toggle('hidden')
+  faqItems.forEach((el) => {
+    el.addEventListener('click', () => {
+      el.parentElement?.toggleAttribute('data-expanded')
+      el.querySelector('.minus')?.classList.toggle('hidden')
+      el.querySelector('.plus')?.classList.toggle('hidden')
     })
   })
 </script>

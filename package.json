@@ -11,6 +11,7 @@
     "dev": "turbo dev",
     "lint": "turbo lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "astro:build": "cd apps/astro && bun run build",
     "sanity:extract": "cd apps/sanity && bunx sanity schema extract",
     "sanity:gen": "bun run sanity:extract && cd apps/sanity && sanity typegen generate",
     "apps:dev": "concurrently \"cd apps/astro && bun run dev\" \"cd apps/sanity && bun run dev\""
@@ -20,6 +21,7 @@
     "dev": "Starts the apps in development mode",
     "lint": "Lints the apps",
     "format": "Formats the apps",
+    "astro:build": "Builds the Astro app for production",
     "sanity:extract": "Extracts the schema from the Sanity Studio",
     "sanity:gen": "Generates the TypeScript types for the schema",
     "apps:dev": "Starts the apps in development mode"

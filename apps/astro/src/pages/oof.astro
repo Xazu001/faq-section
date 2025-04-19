@@ -5,7 +5,13 @@ import sanityFetch from '../utils/sanity.fetch'
 import CirclePlus from '@/src/components/icons/CirclePlus'
 import CircleMinus from '@/src/components/icons/CircleMinus'
 
-const metadata = await metadataFetch('Index_Page')
+let metadata;
+try {
+  metadata = await metadataFetch('Index_Page');
+} catch (e) {
+  metadata = {};
+}
+if (!metadata) metadata = {};
 // Fix type if openGraphImage is nested, and ensure it matches OpenGraphImageProps
 if (
   metadata.openGraphImage &&
@@ -32,7 +38,12 @@ const fixedFaq = faqData.map((faq) => ({
 }))
 ---
 
-<Layout {...metadata}>
+<Layout
+  path=""
+  title={metadata.title ?? ''}
+  description={metadata.description ?? ''}
+  openGraphImage={metadata.openGraphImage}
+>
   <section id="faq">
     <div>
       <div class="header">
@@ -76,11 +87,11 @@ const fixedFaq = faqData.map((faq) => ({
 </Layout>
 <script>
   const faqItems = document.querySelectorAll('#faq li button')!
-  faqItems.forEach((el, idx) => {
-    el.addEventListener('click', (e) => {
-      faqItems[idx].parentElement?.toggleAttribute('data-expanded')
-      // ;(e.currentTarget as HTMLButtonElement)?.querySelector('.minus')?.classList.toggle('hidden')
-      faqItems[idx]?.querySelector('.plus')?.classList.toggle('hidden')
+  faqItems.forEach((el) => {
+    el.addEventListener('click', () => {
+      el.parentElement?.toggleAttribute('data-expanded')
+      // el.querySelector('.minus')?.classList.toggle('hidden')
+      el.querySelector('.plus')?.classList.toggle('hidden')
     })
   })
 </script>
