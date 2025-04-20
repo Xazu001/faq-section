@@ -21,6 +21,8 @@ const { visible, all } = Astro.props
 </div>
 
 <script>
+  // ----- Init cloud position
+
   // ----- Load more FAQ items
   const itemsToLoad = 2
   const loadMoreButton = document.querySelector('.load-more')!
@@ -48,6 +50,11 @@ const { visible, all } = Astro.props
     // ----- Update progress bar
     const progress = document.querySelector('.progress') as HTMLDivElement
     progress.style.setProperty('--progress', `${(allQuestions.length - newHiddenItems.length) / allQuestions.length}`)
+
+    // ----- Update cloud position
+    const cloudBox = document.querySelector('.cloud-box') as HTMLDivElement
+    const progressWidth = progress.clientWidth
+    cloudBox.style.setProperty('--cloud', `${progressWidth}px`)
   })
 </script>
 <style>
@@ -60,14 +67,18 @@ const { visible, all } = Astro.props
   .cloud-box {
     display: flex;
     justify-content: center;
+    --cloud: 0px;
   }
 
   .cloud {
     position: relative;
+    left: var(--cloud);
+    transform: translateX(-100%);
     text-align: center;
     background-color: var(--primary-600);
     padding: 0.2rem 1rem;
     border-radius: 100px;
+    transition: 0.3s var(--cubic-bezier);
   }
 
   .cloud::after {
@@ -103,6 +114,7 @@ const { visible, all } = Astro.props
     width: calc(var(--progress) * 100%);
     background: linear-gradient(280deg, var(--accent-1), var(--accent-2));
     border-radius: 100px;
+    transition: 0.3s var(--cubic-bezier);
   }
 
   .load-more-box {
@@ -115,3 +127,10 @@ const { visible, all } = Astro.props
     gap: 0.8rem;
   }
 </style>
+<script>
+  // ----- Init cloud position
+  // const cloudBox = document.querySelector('.cloud-box') as HTMLDivElement
+  // const all = document.querySelectorAll('#faq li')!.length
+  // const visible = document.querySelectorAll('#faq li:not([data-expanded])')!.length
+  // cloudBox.style.setProperty('--cloud', `${(all - visible) / all}`)
+</script>

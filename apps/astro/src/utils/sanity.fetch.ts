@@ -45,11 +45,11 @@ type IsSingleDocument<Q extends string> =
   Q extends `${string}[0]` ? true : false;
 
 // Infer the return type based on the GROQ query pattern
-type TypeFromQuery<Q extends string> = 
+type TypeFromQuery<Q extends string> =
   ExtractTypeName<Q> extends SanityDocumentTypeNames ?
-    IsSingleDocument<Q> extends true ?
-      DocTypeToInterface<CustomDocTypes>[ExtractTypeName<Q>] : // Single document
-      DocTypeToInterface<CustomDocTypes>[ExtractTypeName<Q>][] : // Array of documents
+  IsSingleDocument<Q> extends true ?
+  DocTypeToInterface<CustomDocTypes>[ExtractTypeName<Q>] : // Single document
+  DocTypeToInterface<CustomDocTypes>[ExtractTypeName<Q>][] : // Array of documents
   unknown; // Fallback for unknown patterns
 
 /**

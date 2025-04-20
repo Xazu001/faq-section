@@ -29,6 +29,9 @@
 
   --typography-heading-l: 3.8rem;
 
+  // Others
+  --cubic-bezier: cubic-bezier(0.61, 1, 0.88, 1);
+
   // Margins
   --page-margin: clamp(1rem, calc(2vw / 0.48), 2rem);
 
