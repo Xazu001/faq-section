@@ -14,11 +14,6 @@ export default defineType({
   fields: [
     ...defineSlugForDocument({ slug: slug }),
     defineField({
-      name: 'components',
-      type: 'components',
-      title: 'Page Components',
-    }),
-    defineField({
       name: 'seo',
       type: 'seo',
       title: 'SEO',
