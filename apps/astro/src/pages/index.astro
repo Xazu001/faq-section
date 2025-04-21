@@ -16,7 +16,7 @@ const fixedFaq =
     answer: faq.answer?.[0]?.children?.[0]?.text,
   })) || []
 
-const visibleQuestions = 2
+const visibleQuestions = 7
 const allQuestions = fixedFaq?.length ?? 0
 ---
 
@@ -37,7 +37,7 @@ const allQuestions = fixedFaq?.length ?? 0
             <li class={index < visibleQuestions ? '' : 'display-none'}>
               <button>
                 <strong>{(index + 1).toString().padStart(2, '0')}</strong>
-                <div>
+                <div class="main">
                   <div class="question">
                     <p>{faq.question}</p>
                     <div class="icons">
@@ -118,6 +118,10 @@ const allQuestions = fixedFaq?.length ?? 0
     padding: 2rem 1.6rem;
     text-align: left;
     position: relative;
+  }
+
+  .main {
+    width: 100%;
   }
 
   .line-box {

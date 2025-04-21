@@ -11,7 +11,7 @@ const { visible, all } = Astro.props
       </div>
     </div>
 
-    <div class="progress" style={`--progress: ${visible / all}`}>
+    <div class="progress">
       <div class="progress-arrow"></div>
     </div>
     <div class="load-more-box">
@@ -22,6 +22,16 @@ const { visible, all } = Astro.props
 
 <script>
   // ----- Init cloud position
+  const cloudBox = document.querySelector('.cloud-box') as HTMLDivElement
+  const progress = document.querySelector('.progress') as HTMLDivElement
+  const allQuestions = document.querySelectorAll('#faq li')!
+  const hiddenItems = document.querySelectorAll('#faq li.display-none')!
+  const visibleItems = allQuestions.length - hiddenItems.length
+
+  cloudBox.style.setProperty('--cloud', `${(visibleItems / allQuestions.length) * 100}%`)
+
+  // ----- Init progress bar
+  progress.style.setProperty('--progress', `${visibleItems / allQuestions.length}`)
 
   // ----- Load more FAQ items
   const itemsToLoad = 2
@@ -53,8 +63,10 @@ const { visible, all } = Astro.props
 
     // ----- Update cloud position
     const cloudBox = document.querySelector('.cloud-box') as HTMLDivElement
-    const progressWidth = progress.clientWidth
-    cloudBox.style.setProperty('--cloud', `${progressWidth}px`)
+    cloudBox.style.setProperty(
+      '--cloud',
+      `${((allQuestions.length - newHiddenItems.length) / allQuestions.length) * 100}%`
+    )
   })
 </script>
 <style>
@@ -66,21 +78,20 @@ const { visible, all } = Astro.props
 
   .cloud-box {
     display: flex;
-    justify-content: center;
-    --cloud: 0px;
+    position: relative;
+    --cloud: 0;
   }
 
   .cloud {
     position: relative;
     left: var(--cloud);
-    transform: translateX(-100%);
+    transform: translateX(-50%);
     text-align: center;
     background-color: var(--primary-600);
     padding: 0.2rem 1rem;
     border-radius: 100px;
     transition: 0.3s var(--cubic-bezier);
   }
-
   .cloud::after {
     height: 30%;
     aspect-ratio: 1;
@@ -99,12 +110,12 @@ const { visible, all } = Astro.props
 
   .progress {
     margin-top: 1.5rem;
-    --progress: 0.5;
     height: 0.3rem;
     background-color: var(--primary-600);
     border-radius: 100px;
     overflow: visible;
     position: relative;
+    --progress: 0;
   }
 
   .progress::before {
@@ -127,10 +138,3 @@ const { visible, all } = Astro.props
     gap: 0.8rem;
   }
 </style>
-<script>
-  // ----- Init cloud position
-  // const cloudBox = document.querySelector('.cloud-box') as HTMLDivElement
-  // const all = document.querySelectorAll('#faq li')!.length
-  // const visible = document.querySelectorAll('#faq li:not([data-expanded])')!.length
-  // cloudBox.style.setProperty('--cloud', `${(all - visible) / all}`)
-</script>
