@@ -9,7 +9,7 @@ export default async function metadataFetch(type: string, slug?: string): Promis
   const seo = await sanityFetch({
     query: /* groq */ `
       ${filter} {
-        "path": "/",
+        "path": coalesce(slug.current, '/'),
         "title": seo.title,
         "description": seo.description,
         "openGraphImage": {
@@ -20,7 +20,6 @@ export default async function metadataFetch(type: string, slug?: string): Promis
     `,
     ...(slug && { params: { slug: slug } }),
   }) as Props;
-
   if (!seo?.path) throw new Error(`The path for '${type}' is not specified`);
   if (!seo?.title) throw new Error(`The title for '${type}' is not specified`);
   if (!seo?.description) throw new Error(`The description for '${type}' is not specified`);
