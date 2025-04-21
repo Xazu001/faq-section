@@ -6,10 +6,13 @@ export default async function metadataFetch(type: string, slug?: string): Promis
     ? `*[_type == '${type}' && slug.current == $slug][0]`
     : `*[_type == "${type}"][0]`;
 
+  // Special handling for Index_Page to ensure it has a path
+  const isIndexPage = type === 'Index_Page';
+
   const seo = await sanityFetch({
     query: /* groq */ `
       ${filter} {
-        "path": coalesce(slug.current, '/'),
+        "path": ${isIndexPage ? "'/'" : "coalesce(slug.current, '/')"}, 
         "title": seo.title,
         "description": seo.description,
         "openGraphImage": {
