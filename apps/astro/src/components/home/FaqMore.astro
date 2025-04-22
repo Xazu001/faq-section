@@ -49,7 +49,7 @@ const { visible, all } = Astro.props
 
     // ----- Hide load more button if no more items to show
     if (newHiddenItems.length === 0) {
-      document.querySelector('.faq-more')!.classList.add('display-none')
+      document.querySelector('.faq-more')!.classList.add('opacity-0')
     }
 
     // ----- Update cloud text
@@ -74,6 +74,7 @@ const { visible, all } = Astro.props
     display: flex;
     justify-content: center;
     margin-top: 3.2rem;
+    transition: 0.3s linear;
   }
 
   .cloud-box {
@@ -92,6 +93,7 @@ const { visible, all } = Astro.props
     border-radius: 100px;
     transition: 0.3s var(--cubic-bezier);
   }
+
   .cloud::after {
     height: 30%;
     aspect-ratio: 1;
@@ -136,5 +138,10 @@ const { visible, all } = Astro.props
     display: flex;
     align-items: center;
     gap: 0.8rem;
+  }
+
+  .opacity-0 {
+    opacity: 0;
+    pointer-events: none;
   }
 </style>
