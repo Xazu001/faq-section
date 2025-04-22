@@ -12,20 +12,26 @@ This will install all dependencies for the monorepo and its apps.
 
 ### 2. Set Up Environment Variables
 
-Create a `.env` file in the root of the repository (or in the relevant app directories) and set the following environment variables:
+Create a `.env` file in the in the relevant app directories and set the following environment variables:
 
 ```env
 # Required for Sanity API access
 SANITY_API_TOKEN=your_sanity_api_token_here
 
 # Domain for Sanity Studio preview (e.g., http://localhost:4321 or your deployed Astro domain)
-SANITY_STUDIO_PREVIEW_DOMAIN=http://localhost:4321
+SANITY_STUDIO_PREVIEW_DOMAIN=http://localhost:4321  
+IN SANITY YOU HAVE TO FULLFILL SOME REQUIRED DATA TO START THE PROJECT  
+ALSO YOU HAVE TO CREATE A SANITY STUDIO USER TO LOGIN INTO THE STUDIO
 ```
 
 - `SANITY_API_TOKEN`: You can generate this token from your Sanity project settings.
 - `SANITY_STUDIO_PREVIEW_DOMAIN`: This should point to your Astro app's domain for previewing content.
 
-### 3. Development
+### 3. Some other setup  
+
+Edit files like apps/sanity/constants.ts and apps/astro/src/global/constants.ts
+
+### 4. Development
 
 To run both Astro and Sanity apps in development mode concurrently:
 
