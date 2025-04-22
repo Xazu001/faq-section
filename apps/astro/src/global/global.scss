@@ -19,7 +19,7 @@
 }
 
 :root {
-  --g-font-size: clamp(calc(18rem / 16), 24vw/7.68, calc(32rem / 16));
+  --g-font-size: clamp(calc(18rem / 16), 24vw/7.68, calc(32rem / 16)); // Implemented for better units calculation (Like if i see 38px in figma (On largest screen) then i have to write 3.8rem)
   font-size: calc(var(--g-font-size) * 0.30);
 
   --accent-1: #2dd282;
