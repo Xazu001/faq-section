@@ -21,9 +21,9 @@ const allQuestions = fixedFaq?.length ?? 0
 ---
 
 <Layout
-  path=""
-  title={metadata.title ?? ''}
-  description={metadata.description ?? ''}
+  path={metadata.path ?? '/'}
+  title={metadata.title ?? 'FAQ'}
+  description={metadata.description ?? 'Just a FAQ'}
   openGraphImage={metadata.openGraphImage}
 >
   <section id="faq">
