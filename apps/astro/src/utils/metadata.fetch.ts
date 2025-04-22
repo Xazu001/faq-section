@@ -2,9 +2,7 @@
 import type { Props } from "@/src/layouts/Head.astro";
 import sanityFetch from "@/utils/sanity.fetch";
 export default async function metadataFetch(type: string, slug?: string): Promise<Props> {
-  const filter = slug
-    ? `*[_type == '${type}' && slug.current == $slug][0]`
-    : `*[_type == "${type}"][0]`;
+  const filter = `*[_type == '${type}'][0]`;
 
   console.log("filter", filter)
 
