@@ -27,19 +27,20 @@ const seo = await sanityFetch({
 })
 
 export type Props = {
+  path: string
   title: string
   description: string
   openGraphImage?: OpenGraphImageProps
 }
 
-const { title, description, openGraphImage } = Astro.props
+const { path, title, description, openGraphImage } = Astro.props
 
 const OpenGraphImage = {
   url: openGraphImage?.url || (seo as any).openGraphImage?.url,
   height: openGraphImage?.height || (seo as any).openGraphImage?.height,
 }
 
-const url = `${DOMAIN}`
+const url = `${DOMAIN}${path}`
 ---
 
 <meta charset="utf-8" />
