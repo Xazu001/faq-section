@@ -16,15 +16,15 @@ const fixedFaq =
     answer: faq.answer?.[0]?.children?.[0]?.text,
   })) || []
 
-const visibleQuestions = faqData[0]?.showItems ?? 7
-const allQuestions = fixedFaq?.length ?? 0
-const toLoad = faqData[0]?.loadMoreItems ?? 2
+const visibleQuestions = faqData[0]?.showItems || 7
+const allQuestions = fixedFaq?.length || 0
+const toLoad = faqData[0]?.loadMoreItems || 2
 ---
 
 <Layout
-  path={metadata.path ?? '/'}
-  title={metadata.title ?? 'FAQ'}
-  description={metadata.description ?? 'Just a FAQ'}
+  path={metadata.path || '/'}
+  title={metadata.title || 'FAQ'}
+  description={metadata.description || 'Just a FAQ'}
   openGraphImage={metadata.openGraphImage}
 >
   <section id="faq">
