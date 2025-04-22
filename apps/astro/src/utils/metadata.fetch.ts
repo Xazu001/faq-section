@@ -6,13 +6,13 @@ export default async function metadataFetch(type: string, slug?: string): Promis
     ? `*[_type == '${type}' && slug.current == $slug][0]`
     : `*[_type == "${type}"][0]`;
 
-  // Special handling for Index_Page to ensure it has a path
-  const isIndexPage = type === 'Index_Page';
+  console.log("filter", filter)
+
 
   const seo = await sanityFetch({
     query: /* groq */ `
       ${filter} {
-        "path": ${isIndexPage ? "'/'" : "coalesce(slug.current, '/')"}, 
+        "path": coalesce(slug.current, '/'), 
         "title": seo.title,
         "description": seo.description,
         "openGraphImage": {
@@ -23,6 +23,9 @@ export default async function metadataFetch(type: string, slug?: string): Promis
     `,
     ...(slug && { params: { slug: slug } }),
   }) as Props;
+
+  console.log("seo", seo);
+
   if (!seo?.path) throw new Error(`The path for '${type}' is not specified`);
   if (!seo?.title) throw new Error(`The title for '${type}' is not specified`);
   if (!seo?.description) throw new Error(`The description for '${type}' is not specified`);
