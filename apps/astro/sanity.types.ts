@@ -174,6 +174,8 @@ export type Faq_Collection = {
   _createdAt: string
   _updatedAt: string
   _rev: string
+  showItems?: number
+  loadMoreItems?: number
   faqs?: Array<
     {
       _key: string
@@ -189,7 +191,6 @@ export type Index_Page = {
   _rev: string
   title?: string
   slug?: Slug
-  components?: Components
   seo?: Seo
 }
 

@@ -16,8 +16,9 @@ const fixedFaq =
     answer: faq.answer?.[0]?.children?.[0]?.text,
   })) || []
 
-const visibleQuestions = 7
+const visibleQuestions = faqData[0]?.showItems ?? 7
 const allQuestions = fixedFaq?.length ?? 0
+const toLoad = faqData[0]?.loadMoreItems ?? 2
 ---
 
 <Layout
@@ -65,7 +66,11 @@ const allQuestions = fixedFaq?.length ?? 0
           ))
         }
       </ul>
-      <FaqMore visible={visibleQuestions > allQuestions ? allQuestions : visibleQuestions} all={allQuestions} />
+      <FaqMore
+        visible={visibleQuestions > allQuestions ? allQuestions : visibleQuestions}
+        all={allQuestions}
+        toLoad={toLoad}
+      />
     </div>
   </section>
 </Layout>

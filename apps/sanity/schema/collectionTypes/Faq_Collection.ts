@@ -10,6 +10,22 @@ export default defineType({
   icon,
   fields: [
     defineField({
+      name: "showItems",
+      type: "number",
+      title: "Początkowa liczba wyświetlanych pytań",
+      description: "Liczba pytań, które będą widoczne po wczytaniu strony",
+      initialValue: 5,
+      validation: Rule => Rule.min(1),
+    }),
+    defineField({
+      name: "loadMoreItems",
+      type: "number",
+      title: "Liczba pytań do wczytania",
+      description: "Liczba pytań, które będą widoczne po kliknięciu wyświetl więcej",
+      initialValue: 2,
+      validation: Rule => Rule.min(1),
+    }),
+    defineField({
       name: "faqs",
       type: "array",
       title: "FAQs",

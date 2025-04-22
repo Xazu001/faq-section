@@ -1,6 +1,13 @@
 ---
 import ArrowDown from '@/components/icons/ArrowDown'
-const { visible, all } = Astro.props
+
+type Props = {
+  visible: number
+  all: number
+  toLoad: number
+}
+
+const { visible, all, toLoad } = Astro.props
 ---
 
 <div class="faq-more">
@@ -15,7 +22,7 @@ const { visible, all } = Astro.props
       <div class="progress-arrow"></div>
     </div>
     <div class="load-more-box">
-      <button class="load-more">Wczytaj więcej <ArrowDown size="2rem" /></button>
+      <button class="load-more" data-to-load={toLoad}>Wczytaj więcej <ArrowDown size="2rem" /></button>
     </div>
   </div>
 </div>
@@ -34,7 +41,7 @@ const { visible, all } = Astro.props
   progress.style.setProperty('--progress', `${visibleItems / allQuestions.length}`)
 
   // ----- Load more FAQ items
-  const itemsToLoad = 2
+  const itemsToLoad = Number(document.querySelector('.load-more')!.getAttribute('data-to-load')) || 3
   const loadMoreButton = document.querySelector('.load-more')!
   loadMoreButton.addEventListener('click', () => {
     const hiddenItems = document.querySelectorAll('#faq li.display-none')!

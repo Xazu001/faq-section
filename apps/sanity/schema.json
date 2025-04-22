@@ -1097,6 +1097,20 @@
           "type": "string"
         }
       },
+      "showItems": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "number"
+        },
+        "optional": true
+      },
+      "loadMoreItems": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "number"
+        },
+        "optional": true
+      },
       "faqs": {
         "type": "objectAttribute",
         "value": {
@@ -1168,14 +1182,6 @@
         "value": {
           "type": "inline",
           "name": "slug"
-        },
-        "optional": true
-      },
-      "components": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "inline",
-          "name": "components"
         },
         "optional": true
       },
