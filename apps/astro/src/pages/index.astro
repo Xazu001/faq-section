@@ -91,7 +91,7 @@ const toLoad = faqData[0]?.loadMoreItems ?? 2
     min-height: 101vh;
   }
 
-  svg {
+  h3 svg {
     display: inline;
     vertical-align: middle;
   }
@@ -177,6 +177,10 @@ const toLoad = faqData[0]?.loadMoreItems ?? 2
     flex-shrink: 0;
   }
 
+  .icon {
+    transition: 0.3s linear;
+  }
+
   .minus {
     position: absolute;
     top: 0;
@@ -185,10 +189,6 @@ const toLoad = faqData[0]?.loadMoreItems ?? 2
 
   .hidden {
     opacity: 0;
-  }
-
-  .icon {
-    transition: 0.3s linear;
   }
 
   .slide-in {
