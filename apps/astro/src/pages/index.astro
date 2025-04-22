@@ -58,10 +58,10 @@ const toLoad = faqData[0]?.loadMoreItems || 2
                     <p>{faq.answer}</p>
                   </div>
                 </div>
-                <div class="line-box">
-                  <div class="line" />
-                </div>
               </button>
+              <div class="line-box">
+                <div class="line" />
+              </div>
             </li>
           ))
         }
@@ -91,6 +91,10 @@ const toLoad = faqData[0]?.loadMoreItems || 2
     min-height: 101vh;
   }
 
+  li {
+    position: relative;
+  }
+
   h3 svg {
     display: inline;
     vertical-align: middle;
@@ -113,7 +117,6 @@ const toLoad = faqData[0]?.loadMoreItems || 2
     gap: 3.2rem;
     padding: 2rem 1.6rem;
     text-align: left;
-    position: relative;
   }
 
   .main {
