@@ -207,7 +207,7 @@ const toLoad = faqData[0]?.loadMoreItems || 2
     }
 
     li[data-expanded] .line {
-      animation: none;
+      transition: none;
     }
   }
 
@@ -219,28 +219,6 @@ const toLoad = faqData[0]?.loadMoreItems || 2
     100% {
       opacity: 1;
       transform: translateY(0);
-    }
-  }
-
-  @keyframes line-expand-left {
-    0% {
-      transform: scaleX(0);
-      transform-origin: left;
-    }
-    100% {
-      transform: scaleX(1);
-      transform-origin: left;
-    }
-  }
-
-  @keyframes line-expand-right {
-    0% {
-      transform: scaleX(0);
-      transform-origin: right;
-    }
-    100% {
-      transform: scaleX(1);
-      transform-origin: right;
     }
   }
 </style>
