@@ -169,25 +169,24 @@ const toLoad = faqData[0]?.loadMoreItems || 2
   }
 
   .line-box {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    background: #75758a;
+    position: relative;
+    background: #75758a; /* szara linia bazowa */
     overflow: hidden;
   }
 
   .line {
+    width: 100%;
     height: 2px;
-  }
-
-  li[data-expanded] .line {
     background: linear-gradient(280deg, var(--accent-1), var(--accent-2));
-    animation: line-fluid-expand 0.5s var(--cubic-bezier) both;
+    transition: 0.3s var(--cubic-bezier);
   }
 
   li:not([data-expanded]) .line {
-    transform: translateX(0);
-    animation: none;
+    transform: translateX(-100%);
+  }
+
+  li[data-expanded] .line {
+    transform: translateX(0%);
   }
 
   .slide-in {
@@ -223,17 +222,25 @@ const toLoad = faqData[0]?.loadMoreItems || 2
     }
   }
 
-  @keyframes line-fluid-expand {
+  @keyframes line-expand-left {
     0% {
-      width: 10%;
-      transform: translateX(0);
-    }
-    40% {
-      transform: translateX(100%);
+      transform: scaleX(0);
+      transform-origin: left;
     }
     100% {
-      width: 100%;
-      transform: translateX(0);
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+  }
+
+  @keyframes line-expand-right {
+    0% {
+      transform: scaleX(0);
+      transform-origin: right;
+    }
+    100% {
+      transform: scaleX(1);
+      transform-origin: right;
     }
   }
 </style>
