@@ -24,7 +24,6 @@
 
   --accent-1: #2dd282;
   --accent-2: #90f4e8;
-  --primary-500: #064040;
   --primary-600: #042b2b;
 
   --typography-heading-l: 3.8rem;
@@ -44,10 +43,6 @@ svg {
   max-width: 100%;
   display: block;
   height: auto;
-}
-
-canvas {
-  touch-action: pan-y;
 }
 
 a {
@@ -70,11 +65,6 @@ button {
   color: inherit;
 }
 
-sup {
-  font-size: 0.62em;
-  vertical-align: top;
-}
-
 textarea {
   display: block;
 }
@@ -94,27 +84,6 @@ select {
 ul,
 ol {
   list-style-type: none;
-}
-
-summary {
-  cursor: pointer;
-  list-style: none;
-
-  &::marker,
-  &::-webkit-details-marker {
-    display: none;
-  }
-}
-
-iframe {
-  border: none;
-  display: block;
-}
-
-video {
-  display: block;
-  max-width: 100%;
-  height: auto;
 }
 
 picture,
@@ -202,7 +171,6 @@ h6,
     'ss04' on;
 
   strong {
-    background: var(--primary-gradient-400);
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;

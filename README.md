@@ -1,48 +1,132 @@
-## Getting Started
+# FAQ Section Project
 
-### 1. Install Dependencies
+A modern web application built with Astro, Sanity CMS, and Turborepo. This project provides a structured monorepo setup for developing and managing FAQ content with a headless CMS approach.
 
-Make sure you have [bun](https://bun.sh/) installed (version 1.1.26 or newer recommended).
+## 📋 Project Overview
+
+This project uses:
+- **Astro** for the frontend application
+- **Sanity** for content management
+- **Bun** as the package manager (v1.1.26+)
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- [Bun](https://bun.sh/) v1.1.26 or newer
+- [Node.js](https://nodejs.org/) v18 or newer
+- A [Sanity](https://www.sanity.io/) account
+
+### Project Structure
+
+```
+faq-section/
+├── apps/
+│   ├── astro/    # Frontend Astro application
+│   └── sanity/   # Sanity Studio for content management
+├── package.json  # Root package with workspace configuration
+└── turbo.json    # Turborepo configuration
+```
+
+## 🛠️ Setup Instructions
+
+### 1. Clone & Install Dependencies
 
 ```sh
+# Clone the repository (if you haven't already)
+git clone <repository-url>
+cd faq-section
+
+# Install all dependencies
 bun install
 ```
 
-This will install all dependencies for the monorepo and its apps.
+### 2. Configure Environment Variables
 
-### 2. Set Up Environment Variables
+Create `.env` files in both app directories:
 
-Create a `.env` file in the in the relevant app directories and set the following environment variables:
+**For apps/astro/.env:**
 
 ```env
-# Required for Sanity API access
+# Sanity Configuration
 SANITY_API_TOKEN=your_sanity_api_token_here
-
-# Domain for Sanity Studio preview (e.g., http://localhost:4321 or your deployed Astro domain)
-SANITY_STUDIO_PREVIEW_DOMAIN=http://localhost:4321  
-IN SANITY YOU HAVE TO FULLFILL SOME REQUIRED DATA TO START THE PROJECT  
-ALSO YOU HAVE TO CREATE A SANITY STUDIO USER TO LOGIN INTO THE STUDIO
+SANITY_PROJECT_ID=your_sanity_project_id_here
 ```
 
-- `SANITY_API_TOKEN`: You can generate this token from your Sanity project settings.
-- `SANITY_STUDIO_PREVIEW_DOMAIN`: This should point to your Astro app's domain for previewing content.
+**For apps/sanity/.env:**
 
-### 3. Some other setup  
+```env
+# Preview Configuration
+SANITY_STUDIO_PREVIEW_DOMAIN=http://localhost:4321
+SANITY_PROJECT_ID=your_sanity_project_id_here
+```
 
-Edit files like apps/sanity/constants.ts and apps/astro/src/global/constants.ts
+### 3. Sanity Studio Setup
 
-### 4. Development
+1. Create a Sanity project at [sanity.io/manage](https://www.sanity.io/manage) if you don't have one
+2. Get your Project ID from the Sanity dashboard
+3. Generate an API token with read and write permissions
+4. Create a Sanity Studio user to access the admin panel
 
-To run both Astro and Sanity apps in development mode concurrently:
+### 4. Configure Project Constants
+
+Update the following files with your project-specific information:
+
+- `apps/sanity/constants.ts` - Sanity project configuration
+- `apps/astro/src/global/constants.ts` - Frontend configuration
+
+### 5. Generate Sanity Types (Optional)
+
+To generate TypeScript types for your Sanity schema:
+
+```sh
+bun run sanity:gen
+```
+
+## 🖥️ Development
+
+### Start Development Environment
+
+Run both Astro and Sanity apps in development mode:
 
 ```sh
 bun run apps:dev
 ```
 
-This will start both apps using concurrently.
+This will start:
+- Astro frontend at [http://localhost:4321](http://localhost:4321)
+- Sanity Studio at [http://localhost:3333](http://localhost:3333)
 
----
+### Individual App Development
 
-## Authors
+To run apps individually:
+
+```sh
+# For Astro frontend only
+cd apps/astro && bun run dev
+
+# For Sanity Studio only
+cd apps/sanity && bun run dev
+```
+
+## 🏗️ Building for Production
+
+Build all applications:
+
+```sh
+bun run build
+```
+
+## 📚 Available Scripts
+
+- `bun run dev` - Start all apps in development mode
+- `bun run build` - Build all apps for production
+- `bun run lint` - Lint all apps
+- `bun run format` - Format code with Prettier
+- `bun run sanity:extract` - Extract Sanity schema
+- `bun run sanity:gen` - Generate TypeScript types for Sanity schema
+- `bun run apps:dev` - Run Astro and Sanity concurrently
+
+## 👥 Authors & Credits
 
 Based on [Astro + Sanity + Turborepo Starter](https://github.com/milewskibogumil/astro-sanity-turborepo-starter) by [@milewskibogumil](https://github.com/milewskibogumil)
