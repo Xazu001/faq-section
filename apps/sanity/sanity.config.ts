@@ -5,13 +5,13 @@ import { structureTool } from 'sanity/structure'
 import { media } from 'sanity-plugin-media'
 import { visionTool } from '@sanity/vision'
 
+// Change projectId here
+
 export default defineConfig({
   name: 'default',
   title: 'FAQ Section',
-
   projectId: 'vp4m23g3',
   dataset: 'production',
-
   plugins: [
     structureTool({ structure }),
     media(),

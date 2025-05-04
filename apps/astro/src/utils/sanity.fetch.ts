@@ -8,6 +8,8 @@ if (isPreviewDeployment && !SANITY_API_TOKEN) {
   console.warn('\x1b[33m%s\x1b[0m', "The `SANITY_API_TOKEN` environment variable is required.");
 }
 
+// Change projectId here
+
 export const client = createClient({
   projectId: 'vp4m23g3',
   dataset: 'production',
