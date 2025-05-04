@@ -59,18 +59,11 @@ Create a `.env` file in the relevant app directories:
 ```env
 # Required for Sanity API access
 SANITY_API_TOKEN=your_sanity_api_token_here
-
-# Domain for Sanity Studio preview
-SANITY_STUDIO_PREVIEW_DOMAIN=http://localhost:4321
 ```
 
 #### For Sanity (`apps/sanity/.env`):
 
 ```env
-# Your Sanity project ID (same as in config files)
-SANITY_STUDIO_PROJECT_ID=your_project_id_here
-
-# Your Sanity dataset name
 SANITY_STUDIO_DATASET=production
 ```
 
