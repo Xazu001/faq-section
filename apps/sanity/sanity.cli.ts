@@ -1,11 +1,10 @@
 import { defineCliConfig } from 'sanity/cli'
-import { projectId } from './sanity.config'
 
 // Change projectId here
 
 export default defineCliConfig({
   api: {
-    projectId: projectId(),
+    projectId: 'vp4m23g3',
     dataset: 'production'
   },
   studioHost: 'faq-section'
