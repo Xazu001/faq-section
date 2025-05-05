@@ -75,6 +75,14 @@ This will start:
 - Astro frontend at: http://localhost:5173
 - Sanity Studio at: http://localhost:3333
 
+### 4. Sanity Schema Generation
+
+After modifying fields in Sanity Studio, you need to regenerate the TypeScript types for the schema by running:
+
+```sh
+bun run sanity:gen
+```
+
 ## Authors
 
 Based on [Astro + Sanity + Turborepo Starter](https://github.com/milewskibogumil/astro-sanity-turborepo-starter) by [@milewskibogumil](https://github.com/milewskibogumil)
