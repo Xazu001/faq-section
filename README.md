@@ -28,51 +28,42 @@ bun install
 
 This will install all dependencies for the monorepo and its apps.
 
-### 2. Configure Sanity Project ID
+### 2. Set Up Environment Variables and Sanity Project
 
-You need to update the Sanity project ID in the following files:
+This project uses a hardcoded Sanity project ID in constants files rather than environment variables. Here's what you need to configure:
 
-1. **`apps/astro/src/global/constants.ts`** (line 13):
-   ```typescript
-   defaultValue = '', // Replace with your Sanity project ID
-   ```
+#### Environment Variables
 
-2. **`apps/sanity/constans.ts`** (line 6):
-   ```typescript
-   defaultValue = '', // Replace with your Sanity project ID
-   ```
-
-You can create a new Sanity project by running:
-```sh
-cd apps/sanity
-bun sanity init
-```
-
-### 3. Set Up Environment Variables
-
-Create a `.env` file in the relevant app directories:
-
-#### For Astro (`apps/astro/.env`):
+Create a `.env` file in the Astro app directory:
 
 ```env
-# Required for Sanity API access
+# Required for Sanity API access (apps/astro/.env)
 SANITY_API_TOKEN=your_sanity_api_token_here
-
-# Sanity Project ID (overrides the defaultValue in constants.ts)
-SANITY_PROJECT_ID=your_project_id_here
-```
-
-#### For Sanity (`apps/sanity/.env`):
-
-```env
-# Your Sanity project ID (same as in config files)
-SANITY_PROJECT_ID=your_project_id_here
 ```
 
 - **SANITY_API_TOKEN**: Generate this token from your Sanity project settings under API section.
-- **SANITY_PROJECT_ID**: Your Sanity project ID that will override the default value in constants.ts.
 
-### 4. Development
+#### Constants Configuration
+
+The project uses hardcoded constants for the Sanity project ID in both apps:
+
+1. **Astro Constants** (`apps/astro/src/global/constants.ts`):
+   ```typescript
+   export const PROJECT_ID: string = "vp4m23g3";
+   ```
+   
+   This constant is used in `apps/astro/src/utils/sanity.fetch.ts` to configure the Sanity client.
+
+2. **Sanity Constants** (`apps/sanity/constants.ts`):
+   ```typescript
+   export const PROJECT_ID: string = "vp4m23g3";
+   ```
+   
+   This constant is used in both `sanity.config.ts` and `sanity.cli.ts`.
+
+> **NOTE**: If you want to use a different Sanity project, you must update the `PROJECT_ID` constant in both files to match your project ID.
+
+### 3. Development
 
 To run both Astro and Sanity apps in development mode concurrently:
 

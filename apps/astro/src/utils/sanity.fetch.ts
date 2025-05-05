@@ -1,7 +1,7 @@
 import { createClient, type QueryParams } from '@sanity/client'
 import { isPreviewDeployment } from './is-preview-deployment';
 import type { AllSanitySchemaTypes } from 'sanity.types';
-import { getProjectId } from '../global/constants';
+import { PROJECT_ID } from '../global/constants';
 
 const SANITY_API_TOKEN = import.meta.env.SANITY_API_TOKEN || process.env.SANITY_API_TOKEN;
 
@@ -10,7 +10,7 @@ if (isPreviewDeployment && !SANITY_API_TOKEN) {
 }
 
 export const client = createClient({
-  projectId: getProjectId(),
+  projectId: PROJECT_ID,
   dataset: 'production',
   apiVersion: '2024-10-15',
   useCdn: false,

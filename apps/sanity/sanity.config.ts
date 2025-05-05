@@ -4,12 +4,12 @@ import { schemaTypes, singletonActions, singletonTypes } from './structure/schem
 import { structureTool } from 'sanity/structure'
 import { media } from 'sanity-plugin-media'
 import { visionTool } from '@sanity/vision'
-import { getProjectId } from "./constants";
+import { PROJECT_ID } from "./constants";
 
 export default defineConfig({
   name: 'default',
   title: 'FAQ Section',
-  projectId: getProjectId(),
+  projectId: PROJECT_ID,
   dataset: 'production',
   plugins: [
     structureTool({ structure }),

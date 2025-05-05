@@ -1,16 +1,6 @@
 
 
-export const getProjectId = () => {
-    const projectId = process.env.SANITY_PROJECT_ID;
-    const defaultValue = 'vp4m23g3';
-
-    if (!projectId) {
-        console.warn('\x1b[33m%s\x1b[0m', "The `SANITY_PROJECT_ID` environment variable is required! Using default value.");
-    }
-
-    return projectId ?? defaultValue;
-}
-
+export const PROJECT_ID: string = "vp4m23g3";
 /**
  * Global declaration of the domain for the application.
  * This constant is used for constructing full URLs and determining external links.
