@@ -1,6 +1,6 @@
 # FAQ Section Project
 
-This is a monorepo project using Turborepo with Astro and Sanity, designed to create and manage FAQ sections for websites.
+This is a monorepo project with Astro and Sanity, made just for my personal use.
 
 ## Project Structure
 
@@ -8,6 +8,9 @@ This is a monorepo project using Turborepo with Astro and Sanity, designed to cr
 faq-section/
 ├── apps/
 │   ├── astro/        # Frontend Astro application
+│   │   └── src/
+│   │       └── global/
+│   │           └── constants.ts  # Global constants configuration
 │   └── sanity/       # Sanity CMS backend
 ├── packages/         # Shared packages
 └── ...
@@ -29,19 +32,14 @@ This will install all dependencies for the monorepo and its apps.
 
 You need to update the Sanity project ID in the following files:
 
-1. **`apps/sanity/sanity.config.ts`** (line 12):
+1. **`apps/astro/src/global/constants.ts`** (line 13):
    ```typescript
-   projectId: '', // Replace with your Sanity project ID
+   defaultValue = '', // Replace with your Sanity project ID
    ```
 
-2. **`apps/sanity/sanity.cli.ts`** (line 6):
+2. **`apps/sanity/constans.ts`** (line 6):
    ```typescript
-   projectId: '', // Replace with your Sanity project ID
-   ```
-
-3. **`apps/astro/src/utils/sanity.fetch.ts`** (line 13):
-   ```typescript
-   projectId: '', // Replace with your Sanity project ID
+   defaultValue = '', // Replace with your Sanity project ID
    ```
 
 You can create a new Sanity project by running:
@@ -59,23 +57,22 @@ Create a `.env` file in the relevant app directories:
 ```env
 # Required for Sanity API access
 SANITY_API_TOKEN=your_sanity_api_token_here
+
+# Sanity Project ID (overrides the defaultValue in constants.ts)
+SANITY_PROJECT_ID=your_project_id_here
 ```
 
 #### For Sanity (`apps/sanity/.env`):
 
 ```env
-SANITY_STUDIO_DATASET=production
+# Your Sanity project ID (same as in config files)
+SANITY_PROJECT_ID=your_project_id_here
 ```
 
 - **SANITY_API_TOKEN**: Generate this token from your Sanity project settings under API section.
-- **SANITY_STUDIO_PREVIEW_DOMAIN**: This should point to your Astro app's domain for previewing content.
+- **SANITY_PROJECT_ID**: Your Sanity project ID that will override the default value in constants.ts.
 
-### 4. Sanity Studio Setup
-
-1. Create a Sanity Studio user to login to the studio
-2. Fill in the required data in Sanity Studio to start the project
-
-### 5. Development
+### 4. Development
 
 To run both Astro and Sanity apps in development mode concurrently:
 
@@ -84,21 +81,8 @@ bun run apps:dev
 ```
 
 This will start:
-- Astro frontend at: http://localhost:4321
+- Astro frontend at: http://localhost:5173
 - Sanity Studio at: http://localhost:3333
-
-### 6. Building for Production
-
-```sh
-bun run build
-```
-
-## Troubleshooting
-
-- If you encounter issues with Sanity Studio, ensure you've created a user and are logged in
-- For API connection issues, verify your project ID is correctly set in all files and your API token is valid
-
----
 
 ## Authors
 
